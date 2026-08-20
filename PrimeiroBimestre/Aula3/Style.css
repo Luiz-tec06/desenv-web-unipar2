@@ -1,0 +1,39 @@
+    #Externo {
+        height: 100px;
+        width: 400px;
+        background-color: rgb(253, 9, 200);
+        color: rgb(255, 255, 255);
+        margin: 20px;
+        padding: 20px;
+    }
+
+    main {
+        height: 100vh;
+        background-color: bisque;
+    }
+
+   div  h1 {
+        color: white;
+    }
+
+    span + h1 {
+
+        color: brown;
+    }
+
+    h1 ~ p {
+        color: aqua;
+    }
+
+    .btn {
+
+        padding: 12px;
+        background-color: darkblue;
+        border-radius: 12px;
+    }
+
+    .btn :hover {
+       
+        background-color: rgb(255, 255, 255);
+        cursor: pointer;
+    }
