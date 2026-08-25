@@ -1,4 +1,3 @@
-Consigo sim, irmão 😎. Eu deixaria **mais natural, simples e com cara de aluno**, sem parecer texto gerado ou documentação de empresa. E já deixaria exatamente nos requisitos da atividade.
 
 # 🚀 Desenvolvimento Web
 
