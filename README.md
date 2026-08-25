@@ -18,13 +18,13 @@ Para utilizar este projeto, siga os passos:
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/AnaTriches/Desenvolvimento-web.git
+git clone https://github.com/Luiz-tec06/desenv-web-unipar2.git
 ```
 
 2. Entre na pasta do projeto:
 
 ```bash
-cd Desenvolvimento-web
+cd desenv-web-unipar2
 ```
 
 3. Abra a pasta no **VS Code** ou em outro editor de código.
