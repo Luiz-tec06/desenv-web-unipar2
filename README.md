@@ -1,79 +1,67 @@
-# Titulo Principal
+Consigo sim, irmão 😎. Eu deixaria **mais natural, simples e com cara de aluno**, sem parecer texto gerado ou documentação de empresa. E já deixaria exatamente nos requisitos da atividade.
 
-## Titulo Segundario (h2)
+# 🚀 Desenvolvimento Web
 
-### Titulo Terciario (h3)
+Repositório criado para organizar as atividades e projetos desenvolvidos durante as aulas de **Desenvolvimento Web**.
 
-#### Titulo Segundario (h4)
+## 📚 Descrição
 
-##### Titulo Terciario (h5)
+Este repositório reúne os exercícios, exemplos e atividades que foram realizados durante a disciplina.
 
-###### Titulo Segundario (h6)
+A ideia é organizar os conteúdos por aula e acompanhar minha evolução durante o aprendizado de desenvolvimento web.
 
----
+Durante as aulas foram trabalhados conteúdos como **HTML, Markdown e Git**, além de outros conceitos relacionados ao desenvolvimento de projetos.
 
-Apenas um texto para apresentar o **Marckdown**. Se colocarmos apenas um arteristico (_) irá ficar em ítalico_.
+## ⚙️ Como Instalar
 
-> Citação interessante, texto aleatório só para mostrar o funiconamento.
+Para utilizar este projeto, siga os passos:
 
----
+1. Clone o repositório:
 
-### Lista bullet point
-
-Ingredientes:
-
-* 3 Ovos 
-* 1 Xicara de leite
-  * fermento
-
-  1. Levantar pela manhã 
-  2. Arrumar a cama
-  3. Tomar Café
-
-  To--do Projeto 
-
-  - [x] Configurar ambiente de desenvolvimento
-
-  - [x] Criar landing page inicial
-
-  - [] Integrar com API de pagamentos  
-
----
-
-Tabelas 
-
-| Tecnologias | Perfomace | 
-|      -      |     -     |
-|  Spring Boot|  LENTOO   |
-|  Quarkus    | Jo soi la |
-velocitad|
-
----
-
-Links
-Link da documentação do [Quarkus](https://pt.quarkus.io)
-
-Imagens
-![Kx 450 - Drive](https://www.kawasakibrasil.com/content/dam/products/pim/gallery/Resource_324848_26KX252E_201GN1ALSA2CG_A_KMB.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.png)
-
-
----
-
-Blocos de Codigo
-
-```java
-
-String nome = "Luiz Mario";
+```bash
+git clone https://github.com/AnaTriches/Desenvolvimento-web.git
 ```
 
-```json
-{
-    "nome" : "Luiz Mario"
-    "idade" : "19"
-}
+2. Entre na pasta do projeto:
+
+```bash
+cd Desenvolvimento-web
 ```
 
-Nome da Aplicação:
-`feira-facil-api`
+3. Abra a pasta no **VS Code** ou em outro editor de código.
 
-Primeiro arquivo html: [link](./PrimeiroBimestre/Aulas/Aula1/index.html)
+Não é necessário instalar dependências para acessar as atividades iniciais.
+
+## 💻 Como Usar
+
+O repositório está organizado por bimestres, aulas e atividades.
+
+Por exemplo, para acessar a primeira aula:
+
+```text
+PrimeiroBimestre
+└── Aulas
+    └── Aula1
+```
+
+Dentro das pastas estão os arquivos utilizados durante as atividades.
+
+Os arquivos **HTML** podem ser abertos diretamente no navegador para visualizar as páginas desenvolvidas.
+
+## 🛠️ Tecnologias
+
+* HTML
+* Markdown
+* Git
+* GitHub
+* Visual Studio Code
+
+## 🔗 Primeiro Arquivo HTML
+
+Para acessar o primeiro arquivo HTML desenvolvido durante as aulas:
+
+[📄 Primeiro arquivo HTML](./PrimeiroBimestre/Aulas/Aula1/index.html)
+
+## 🎯 Objetivo
+
+O objetivo deste repositório é manter as atividades organizadas e registrar minha evolução durante as aulas de Desenvolvimento Web.
