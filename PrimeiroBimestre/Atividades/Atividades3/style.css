@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #08001a, #14002e, #001d3d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+}
+
+/* Caixa principal */
+body::before {
+    content: "";
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    background: #7b2cff;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.25;
+    top: -150px;
+    left: -150px;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: #00b7ff;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.2;
+    bottom: -150px;
+    right: -100px;
+}
+
+form,
+h1,
+ul {
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px #8b5cff;
+}
+
+/* Container da lista */
+body {
+    flex-direction: column;
+}
+
+form {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+input {
+    flex: 1;
+    padding: 16px 18px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: 0.3s;
+}
+
+input::placeholder {
+    color: #bcbcbc;
+}
+
+input:focus {
+    border-color: #8b5cff;
+    box-shadow: 0 0 15px rgba(139, 92, 255, 0.5);
+}
+
+/* Botão */
+button {
+    padding: 0 25px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #7b2cff, #00a8ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 20px rgba(0, 168, 255, 0.25);
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 92, 255, 0.5);
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* Lista */
+ul {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 25px;
+    list-style: none;
+}
+
+/* Tarefas */
+li {
+    position: relative;
+    margin-bottom: 12px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    color: #f5f5f5;
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Barrinha colorida */
+li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 14px 0 0 14px;
+    background: linear-gradient(#7b2cff, #00c6ff);
+}
+
+/* Hover da tarefa */
+li:hover {
+    transform: translateX(8px);
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(139, 92, 255, 0.5);
+    box-shadow: 0 8px 25px rgba(123, 44, 255, 0.25);
+}
+
+/* Aviso visual de que pode clicar */
+li:active {
+    transform: scale(0.98);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 32px;
+    }
+
+    form {
+        flex-direction: column;
+    }
+
+    button {
+        padding: 15px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    li {
+        font-size: 16px;
+    }
+}
+
