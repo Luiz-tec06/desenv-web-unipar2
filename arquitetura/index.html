@@ -1,0 +1,734 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação de arquitetura e regras de negócio do Sistema de Gestão da Granja">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../regra-de-negocio/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Arquitetura - Sistema de Gestão da Granja da Sogra</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#arquitetura" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Sistema de Gestão da Granja da Sogra" class="md-header__button md-logo" aria-label="Sistema de Gestão da Granja da Sogra" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistema de Gestão da Granja da Sogra
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Arquitetura
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Sistema de Gestão da Granja da Sogra" class="md-nav__button md-logo" aria-label="Sistema de Gestão da Granja da Sogra" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistema de Gestão da Granja da Sogra
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nivel-1-diagrama-de-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nível 1 - Diagrama de Contexto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nível 1 - Diagrama de Contexto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sistemas-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistemas externos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nivel-2-diagrama-de-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nível 2 - Diagrama de Containers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nível 2 - Diagrama de Containers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Containers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comunicacao-entre-os-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comunicação entre os blocos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regra-de-negocio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regra de Negócio / Fluxo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nivel-1-diagrama-de-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nível 1 - Diagrama de Contexto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nível 1 - Diagrama de Contexto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#atores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Atores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sistemas-externos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sistemas externos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nivel-2-diagrama-de-containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nível 2 - Diagrama de Containers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nível 2 - Diagrama de Containers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#containers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Containers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comunicacao-entre-os-blocos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comunicação entre os blocos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="arquitetura">Arquitetura<a class="headerlink" href="#arquitetura" title="Permanent link">&para;</a></h1>
+<p>A arquitetura do sistema foi documentada com o <strong>C4 Model</strong>, nos dois primeiros níveis de abstração: o Diagrama de Contexto (Nível 1) e o Diagrama de Containers (Nível 2).</p>
+<h2 id="nivel-1-diagrama-de-contexto">Nível 1 - Diagrama de Contexto<a class="headerlink" href="#nivel-1-diagrama-de-contexto" title="Permanent link">&para;</a></h2>
+<p>Mostra o Sistema de Gestão da Granja no centro, com as pessoas que o utilizam e os sistemas externos com os quais ele se comunica.</p>
+<p><img alt="Diagrama de Contexto - Nível 1" src="../img/Diagrama%20Granja%20da%20Sogra-N%C3%ADvel%201%20-%20Contexto.drawio.png" /></p>
+<h3 id="atores">Atores<a class="headerlink" href="#atores" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ator</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gestora da Granja</td>
+<td>Proprietária; acompanha produção, estoque, vendas e finanças.</td>
+</tr>
+<tr>
+<td>Funcionário da Granja</td>
+<td>Registra coleta de ovos, mortalidade e consumo de ração.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sistemas-externos">Sistemas externos<a class="headerlink" href="#sistemas-externos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Sistema</th>
+<th>Finalidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API WhatsApp (Meta)</td>
+<td>Envio de alertas de estoque baixo, vacinas e confirmações de pedido.</td>
+</tr>
+<tr>
+<td>Gateway de Pagamento (PIX)</td>
+<td>Geração de cobranças PIX e confirmação de pagamento das vendas.</td>
+</tr>
+<tr>
+<td>API de NF-e (SEFAZ)</td>
+<td>Emissão de nota fiscal de produtor rural nas vendas.</td>
+</tr>
+<tr>
+<td>API de CEP</td>
+<td>Busca de endereço para agilizar o cadastro de clientes.</td>
+</tr>
+<tr>
+<td>API Consulta CNPJ</td>
+<td>Autocompletar dados de clientes empresa (mercados, padarias).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nivel-2-diagrama-de-containers">Nível 2 - Diagrama de Containers<a class="headerlink" href="#nivel-2-diagrama-de-containers" title="Permanent link">&para;</a></h2>
+<p>Detalha as partes fundamentais do sistema e as tecnologias usadas em cada uma.</p>
+<p><img alt="Diagrama de Containers - Nível 2" src="img/Diagrama%20Granja%20da%20Sogra-Nível%202%20-%20Containers.drawio.pnggit add ." /></p>
+<h3 id="containers">Containers<a class="headerlink" href="#containers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Container</th>
+<th>Tecnologia</th>
+<th>Responsabilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Front-end</td>
+<td>TypeScript, Next.js, React</td>
+<td>Interface web responsiva usada pela gestora (painel) e pelo funcionário (registros pelo celular).</td>
+</tr>
+<tr>
+<td>Back-end</td>
+<td>Node.js, NestJS</td>
+<td>Concentra as regras de negócio: lotes, produção de ovos, estoque, vendas, clientes e disparo de alertas.</td>
+</tr>
+<tr>
+<td>Banco de dados</td>
+<td>PostgreSQL</td>
+<td>Persistência de lotes, produção diária, estoque, vendas e clientes.</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>Redis</td>
+<td>Fila de alertas agendados, controle de idempotência e cache de consultas.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comunicacao-entre-os-blocos">Comunicação entre os blocos<a class="headerlink" href="#comunicacao-entre-os-blocos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Origem</th>
+<th>Destino</th>
+<th>Protocolo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gestora / Funcionário</td>
+<td>Front-end</td>
+<td>HTTPS</td>
+<td>Acompanham produção e registram coleta, mortalidade e ração.</td>
+</tr>
+<tr>
+<td>Front-end</td>
+<td>Back-end</td>
+<td>HTTPS/JSON</td>
+<td>Chamadas à API REST.</td>
+</tr>
+<tr>
+<td>Back-end</td>
+<td>PostgreSQL</td>
+<td>SQL/TCP</td>
+<td>Leitura e gravação dos dados.</td>
+</tr>
+<tr>
+<td>Back-end</td>
+<td>Redis</td>
+<td>TCP</td>
+<td>Enfileira alertas, garante idempotência e usa cache.</td>
+</tr>
+<tr>
+<td>Back-end</td>
+<td>WhatsApp, PIX, CEP, CNPJ</td>
+<td>HTTPS/JSON</td>
+<td>Integrações com serviços externos.</td>
+</tr>
+<tr>
+<td>Back-end</td>
+<td>NF-e (SEFAZ)</td>
+<td>HTTPS/XML</td>
+<td>Emissão de notas fiscais.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Notação</p>
+<p>Nos diagramas, <strong>azul escuro</strong> representa pessoas (atores), <strong>azul claro</strong> representa containers do sistema e <strong>cinza-roxo</strong> representa sistemas externos.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>

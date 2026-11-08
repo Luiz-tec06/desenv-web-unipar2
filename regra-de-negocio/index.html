@@ -1,0 +1,852 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação de arquitetura e regras de negócio do Sistema de Gestão da Granja">
+      
+      
+      
+      
+        <link rel="prev" href="../arquitetura/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Regra de Negócio / Fluxo - Sistema de Gestão da Granja da Sogra</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#regra-de-negocio-fluxo" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Sistema de Gestão da Granja da Sogra" class="md-header__button md-logo" aria-label="Sistema de Gestão da Granja da Sogra" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sistema de Gestão da Granja da Sogra
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Regra de Negócio / Fluxo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Sistema de Gestão da Granja da Sogra" class="md-nav__button md-logo" aria-label="Sistema de Gestão da Granja da Sogra" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Sistema de Gestão da Granja da Sogra
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arquitetura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regra de Negócio / Fluxo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regra de Negócio / Fluxo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-do-sistema-registro-de-coleta-de-ovos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo do Sistema - Registro de Coleta de Ovos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo do Sistema - Registro de Coleta de Ovos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-da-funcionalidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo da Funcionalidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo da Funcionalidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tela-de-registro-de-coleta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tela de registro de coleta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preenchimento-dos-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preenchimento dos dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirmacao-do-registro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirmação do registro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tela-de-sucesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tela de sucesso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacao-de-alertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificação de alertas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regras-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras de negócio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-do-fluxo-de-registro-de-coleta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo do fluxo de registro de coleta
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-do-sistema-registro-de-coleta-de-ovos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo do Sistema - Registro de Coleta de Ovos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo do Sistema - Registro de Coleta de Ovos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Visão Geral
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-da-funcionalidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fluxo da Funcionalidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo da Funcionalidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tela-de-registro-de-coleta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tela de registro de coleta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preenchimento-dos-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preenchimento dos dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#confirmacao-do-registro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Confirmação do registro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tela-de-sucesso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tela de sucesso
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacao-de-alertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificação de alertas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regras-de-negocio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras de negócio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo-do-fluxo-de-registro-de-coleta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumo do fluxo de registro de coleta
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="regra-de-negocio-fluxo">Regra de Negócio / Fluxo<a class="headerlink" href="#regra-de-negocio-fluxo" title="Permanent link">&para;</a></h1>
+<h2 id="fluxo-do-sistema-registro-de-coleta-de-ovos">Fluxo do Sistema - Registro de Coleta de Ovos<a class="headerlink" href="#fluxo-do-sistema-registro-de-coleta-de-ovos" title="Permanent link">&para;</a></h2>
+<h3 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h3>
+<p>A funcionalidade de registro de coleta permite que o funcionário informe, de forma simples e rápida, quantos ovos foram coletados em um lote de aves. Este documento apresenta o fluxo realizado pelo usuário desde a escolha do lote até a confirmação do registro e a atualização do estoque.</p>
+<h3 id="visao-geral">Visão Geral<a class="headerlink" href="#visao-geral" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Acessar a tela de Registro de Coleta</li>
+<li>Selecionar o lote</li>
+<li>Informar a quantidade de ovos coletados</li>
+<li>Informar a quantidade de ovos quebrados ou trincados</li>
+<li>Selecionar <strong>Salvar registro</strong></li>
+<li>O sistema valida as informações</li>
+<li>O sistema grava o registro e atualiza o estoque</li>
+<li>O sistema apresenta a mensagem de sucesso</li>
+<li>O usuário seleciona <strong>Novo registro</strong> ou <strong>Voltar ao início</strong></li>
+</ol>
+<pre class="mermaid"><code>flowchart TD
+    A([Início]) --&gt; B[Acessar Registro de Coleta]
+    B --&gt; C[Selecionar o lote]
+    C --&gt; D[Informar ovos coletados e quebrados]
+    D --&gt; E[Selecionar Salvar registro]
+    E --&gt; F{Dados válidos?}
+    F -- Não --&gt; G[Exibir mensagem de erro no campo]
+    G --&gt; D
+    F -- Sim --&gt; H[Gravar registro e atualizar estoque]
+    H --&gt; I[Exibir mensagem de sucesso]
+    I --&gt; J([Novo registro ou Voltar ao início])</code></pre>
+<h2 id="fluxo-da-funcionalidade">Fluxo da Funcionalidade<a class="headerlink" href="#fluxo-da-funcionalidade" title="Permanent link">&para;</a></h2>
+<h3 id="tela-de-registro-de-coleta">Tela de registro de coleta<a class="headerlink" href="#tela-de-registro-de-coleta" title="Permanent link">&para;</a></h3>
+<p>Nesta etapa, o funcionário escolhe o lote e informa os números da coleta. A tela apresenta os campos principais:</p>
+<ul>
+<li><strong>Lote:</strong> lista dos lotes ativos da granja.</li>
+<li><strong>Data da coleta:</strong> preenchida automaticamente com a data de hoje, podendo ser alterada.</li>
+<li><strong>Ovos coletados:</strong> quantidade total de ovos recolhidos.</li>
+<li><strong>Ovos quebrados ou trincados:</strong> quantidade de ovos que não servem para venda.</li>
+<li><strong>Observações:</strong> campo opcional para anotações do dia.</li>
+</ul>
+<p>Também estão disponíveis o botão <strong>Salvar registro</strong> e a opção <strong>Voltar ao início</strong>.</p>
+<h3 id="preenchimento-dos-dados">Preenchimento dos dados<a class="headerlink" href="#preenchimento-dos-dados" title="Permanent link">&para;</a></h3>
+<dl>
+<dt><strong>Lote</strong></dt>
+<dd>O funcionário seleciona o lote em que a coleta foi feita. Somente lotes ativos aparecem na lista.</dd>
+<dt><strong>Ovos coletados</strong></dt>
+<dd>Quantidade total recolhida. Deve ser um número inteiro maior ou igual a zero.</dd>
+<dt><strong>Ovos quebrados ou trincados</strong></dt>
+<dd>Quantidade descartada. Não pode ser maior que o total coletado.</dd>
+</dl>
+<h3 id="confirmacao-do-registro">Confirmação do registro<a class="headerlink" href="#confirmacao-do-registro" title="Permanent link">&para;</a></h3>
+<p>Depois de preencher os campos, o usuário seleciona o botão <strong>Salvar registro</strong>. A partir dessa ação, o sistema verifica as informações e, estando de acordo com as regras definidas, grava a coleta e atualiza o estoque de ovos.</p>
+<h3 id="tela-de-sucesso">Tela de sucesso<a class="headerlink" href="#tela-de-sucesso" title="Permanent link">&para;</a></h3>
+<p>O sistema informa que o registro foi salvo com sucesso e mostra o resumo: lote, data, ovos coletados, ovos descartados e ovos disponíveis para venda. Nessa etapa estão disponíveis os botões <strong>Novo registro</strong> e <strong>Voltar ao início</strong>.</p>
+<h3 id="verificacao-de-alertas">Verificação de alertas<a class="headerlink" href="#verificacao-de-alertas" title="Permanent link">&para;</a></h3>
+<p>Após a gravação, o sistema compara a produção do dia com a média recente do lote. Se a queda for significativa, a gestora recebe um alerta por WhatsApp (veja a regra RN06).</p>
+<h2 id="regras-de-negocio">Regras de negócio<a class="headerlink" href="#regras-de-negocio" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Regra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RN01</td>
+<td>O registro só pode ser feito para um lote ativo.</td>
+</tr>
+<tr>
+<td>RN02</td>
+<td>A quantidade de ovos coletados deve ser um número inteiro maior ou igual a zero.</td>
+</tr>
+<tr>
+<td>RN03</td>
+<td>A quantidade de ovos quebrados não pode ser maior que a quantidade coletada.</td>
+</tr>
+<tr>
+<td>RN04</td>
+<td>Os ovos disponíveis para venda são calculados como coletados menos quebrados e somados ao estoque.</td>
+</tr>
+<tr>
+<td>RN05</td>
+<td>Um clique repetido em <strong>Salvar registro</strong> não pode gerar registro duplicado (controle de idempotência).</td>
+</tr>
+<tr>
+<td>RN06</td>
+<td>Se a produção do dia ficar abaixo do limite definido em relação à média recente do lote, a gestora é avisada por WhatsApp.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Como a arquitetura participa</p>
+<p>O Front-end envia o registro ao Back-end, que valida as regras, grava no PostgreSQL e usa o Redis para a idempotência (RN05) e para enfileirar o alerta (RN06). O envio do alerta é feito pela API do WhatsApp (Meta). Veja a página de <a href="../arquitetura/">Arquitetura</a>.</p>
+</div>
+<h2 id="resumo-do-fluxo-de-registro-de-coleta">Resumo do fluxo de registro de coleta<a class="headerlink" href="#resumo-do-fluxo-de-registro-de-coleta" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Ação do usuário</th>
+<th>Resposta do sistema</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01 - Acesso</td>
+<td>Abre a tela de Registro de Coleta</td>
+<td>Exibe o formulário com os lotes ativos</td>
+<td>Tela disponível para preenchimento</td>
+</tr>
+<tr>
+<td>02 - Lote</td>
+<td>Seleciona o lote</td>
+<td>Carrega os dados do lote selecionado</td>
+<td>Lote escolhido</td>
+</tr>
+<tr>
+<td>03 - Coleta</td>
+<td>Informa ovos coletados e quebrados</td>
+<td>Valida os valores nos campos</td>
+<td>Dados preenchidos</td>
+</tr>
+<tr>
+<td>04 - Confirmar</td>
+<td>Clica em <strong>Salvar registro</strong></td>
+<td>Inicia a validação das informações</td>
+<td>Solicitação enviada</td>
+</tr>
+<tr>
+<td>05 - Validação</td>
+<td>Aguarda o processamento</td>
+<td>Verifica as regras RN01 a RN03</td>
+<td>Dados aprovados ou mensagem de erro</td>
+</tr>
+<tr>
+<td>06 - Gravação</td>
+<td>Sem ação (automático)</td>
+<td>Grava o registro e atualiza o estoque (RN04, RN05)</td>
+<td>Estoque atualizado</td>
+</tr>
+<tr>
+<td>07 - Sucesso</td>
+<td>Visualiza a confirmação</td>
+<td>Exibe a mensagem com o resumo do registro</td>
+<td>Registro concluído</td>
+</tr>
+<tr>
+<td>08 - Retorno</td>
+<td>Clica em <strong>Novo registro</strong> ou <strong>Voltar ao início</strong></td>
+<td>Abre um novo formulário ou a tela inicial</td>
+<td>Usuário pronto para a próxima ação</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "content.code.copy"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
